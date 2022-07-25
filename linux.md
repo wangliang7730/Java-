@@ -35,9 +35,26 @@ DNF特别友好地继承了原有的命令格式，且使用习惯上也保持�
 Linux系统的开机过程是这样的，即先从BIOS开始，然后进入Boot Loader，再加载系统内核，然后内核进行初始化，最后启动初始化进程。初始化进程作为Linux系统启动后的第一个正式服务，它需要完成Linux系统中相关的初始化工作，为用户提供合适的工作环境。同学们可以将初始化进程粗犷地理解成从我们按下开机键到看见系统桌面的这个过程。初始化进程完成了一大半工作。
 红帽RHEL 7/8系统替换掉了熟悉的初始化进程服务System V init，正式采用全新的systemd初始化进程服务。
 
-![img](file:///C:\Users\Xlibi\AppData\Roaming\Tencent\Users\1046135549\TIM\WinTemp\RichOle\BEZ[IB6{NJWWY7$$XDBF~L9.png)
+表1-4                  服务的启动、重启、停止、重载、查看状态等常用命令
 
-![img](file:///C:\Users\Xlibi\AppData\Roaming\Tencent\Users\1046135549\TIM\WinTemp\RichOle\A2[[OSFIARHI646_7FG1YP0.png)
+| 老系统命令          | 新系统命令              | 作用                           |
+| ------------------- | ----------------------- | ------------------------------ |
+| service foo start   | systemctl start httpd   | 启动服务                       |
+| service foo restart | systemctl restart httpd | 重启服务                       |
+| service foo stop    | systemctl stop httpd    | 停止服务                       |
+| service foo reload  | systemctl reload httpd  | 重新加载配置文件（不终止服务） |
+| service foo status  | systemctl status httpd  | 查看服务状态                   |
+
+表1-5                  服务开机启动、不启动、查看各级别下服务启动状态等常用命令
+
+| 老系统命令        | 新系统命令                             | 作用                               |
+| ----------------- | -------------------------------------- | ---------------------------------- |
+| chkconfig foo on  | systemctl enable httpd                 | 开机自动启动                       |
+| chkconfig foo off | systemctl disable httpd                | 开机不自动启动                     |
+| chkconfig foo     | systemctl is-enabled httpd             | 查看特定服务是否为开机自启动       |
+| chkconfig --list  | systemctl list-unit-files --type=httpd | 查看各个级别下服务的启动与禁用情况 |
+
+
 
 ### shell命令
 
